@@ -1,4 +1,6 @@
 ﻿using EFExample.Services;
+using EFExamples.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -29,7 +31,7 @@ namespace EFExamples
 
             serviceCollection.AddSingleton(configuration);
             serviceCollection.AddTransient<ICarOwnersService, CarOwnersService>();
-            //serviceCollection.AddDbContext<CarOwnersContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            serviceCollection.AddDbContext<CarOwnersContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             serviceCollection.AddTransient<App>();
         }
     }
