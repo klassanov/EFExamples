@@ -12,6 +12,8 @@ namespace EFExamples.Data.Models
 
         public string Nickname { get; set; }
 
+        public int Height { get; set; }
+
         public virtual List<Car> Cars { get; set; }
     }
 }

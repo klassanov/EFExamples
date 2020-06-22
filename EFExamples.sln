@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFExamples", "EFExamples\EFExamples.csproj", "{8532D31C-847B-4184-95F7-C9A8283E5926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFExamples", "EFExamples\EFExamples.csproj", "{8532D31C-847B-4184-95F7-C9A8283E5926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFExamples.Data", "EFExamples.Data\EFExamples.Data.csproj", "{BFEF840A-087A-41A7-A0B8-95923AE2208E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFExamples.Data", "EFExamples.Data\EFExamples.Data.csproj", "{BFEF840A-087A-41A7-A0B8-95923AE2208E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFExample.Services", "EFExample.Services\EFExample.Services.csproj", "{22BF5991-F688-4D37-8592-4C379CD58848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFExample.Services", "EFExample.Services\EFExample.Services.csproj", "{22BF5991-F688-4D37-8592-4C379CD58848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigrator", "DbMigrator\DbMigrator.csproj", "{CBC568BD-A89E-4DE2-9681-4A78B252DF15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{22BF5991-F688-4D37-8592-4C379CD58848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22BF5991-F688-4D37-8592-4C379CD58848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22BF5991-F688-4D37-8592-4C379CD58848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC568BD-A89E-4DE2-9681-4A78B252DF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC568BD-A89E-4DE2-9681-4A78B252DF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC568BD-A89E-4DE2-9681-4A78B252DF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC568BD-A89E-4DE2-9681-4A78B252DF15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
