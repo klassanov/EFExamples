@@ -4,9 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using EFExamples.Web.Old.DataModels;
+using System;
 using System.Data.Services;
 using System.Data.Services.Common;
 using System.Data.Services.Providers;
+using System.Linq.Expressions;
 
 namespace EFExamples.Web.Old
 {
@@ -22,6 +24,19 @@ namespace EFExamples.Web.Old
             //config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
             config.SetEntitySetAccessRule("People", EntitySetRights.AllRead);
+        }
+
+
+        [QueryInterceptor("People")]
+        public Expression<Func<Person, bool>> OnQueryPeople()
+        {
+            return x => x.Height >= 170;
+        }
+
+        [ChangeInterceptor("People")]
+        public void OnChangePeople(Person p, UpdateOperations updateOperations)
+        {
+
         }
     }
 }
