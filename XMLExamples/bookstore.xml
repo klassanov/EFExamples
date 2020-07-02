@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+  <book>
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+  <book>
+    <title lang="it">La divina comedia</title>
+    <author>Dante</author>
+    <year>1900</year>
+    <price>24.99</price>
+  </book>
+  <book>
+    <title lang="bg">Pod Igoto</title>
+    <author>Ivan Vazov</author>
+    <year>1865</year>
+    <price>200</price>
+  </book>
+  <book>
+    <title lang="bg">Geracite</title>
+    <author>Elin Pelin</author>
+    <year>1866</year>
+    <price>201.99</price>
+  </book>
+</bookstore>

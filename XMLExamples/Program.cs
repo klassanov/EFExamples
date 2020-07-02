@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace XMLExamples
 {
@@ -17,7 +18,8 @@ namespace XMLExamples
             Filename = "Person.xml";
             //XMLWriter();
             //XMLReader();
-            XMLDocument();
+            //XMLDocument();
+            XPath();
         }
 
 
@@ -29,7 +31,7 @@ namespace XMLExamples
                 LastName = "Tonchev"
             };
 
-            Console.WriteLine("Writing xml file");
+            Console.WriteLine("Writing xml file with XmlWriter");
 
             using (XmlWriter writer = XmlWriter.Create(sb))
             {
@@ -47,7 +49,7 @@ namespace XMLExamples
 
         static void XMLReader()
         {
-            Console.WriteLine("Reading xml file");
+            Console.WriteLine("Reading xml file with XmlTextReader");
             XmlTextReader reader = new XmlTextReader(Filename);
             while (reader.Read())
             {
@@ -100,7 +102,46 @@ namespace XMLExamples
 
         private static void XMLDocument()
         {
-            throw new NotImplementedException();
+            //Read
+            Console.WriteLine("Reading with XMLDocument");
+            XmlDocument rdoc = new XmlDocument();
+            rdoc.Load(Filename);
+            XmlNodeList nodes = rdoc.ChildNodes;
+            foreach (XmlNode node in nodes)
+            {
+                Console.WriteLine($"{node.Name}: {node.InnerXml}");
+            }
+
+            //Write
+            Console.WriteLine("Writing with XMLDocument");
+            XmlDocument wdoc = new XmlDocument();
+            XmlElement personElement = wdoc.CreateElement("Person");
+            personElement.SetAttribute("Age", "41");
+            wdoc.AppendChild(personElement);
+
+            XmlElement firstNameElement = wdoc.CreateElement("FirstName");
+            firstNameElement.InnerText = "Penko";
+            personElement.AppendChild(firstNameElement);
+
+            XmlElement lastNameElement = wdoc.CreateElement("LastName");
+            lastNameElement.InnerText = "Patarinski";
+            personElement.AppendChild(lastNameElement);
+
+            wdoc.Save(Filename);
+        }
+
+        private static void XPath()
+        {
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load("bookstore.xml");
+            XPathNavigator nav = xdoc.CreateNavigator();
+            string query = "//book/title[@lang='bg']";
+            XPathNodeIterator iterator = nav.Select(query);
+            Console.WriteLine(iterator.Count);
+            while (iterator.MoveNext())
+            {
+                Console.WriteLine(iterator.Current.Value);
+            }
         }
     }
 }
