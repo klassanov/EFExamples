@@ -14,6 +14,8 @@ namespace EFExamples.Data.Models
 
         public int Height { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual List<Car> Cars { get; set; }
     }
 }

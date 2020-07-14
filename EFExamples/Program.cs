@@ -29,10 +29,11 @@ namespace EFExamples
                                                 .Build();
 
 
-            serviceCollection.AddSingleton(configuration);
-            serviceCollection.AddTransient<ICarOwnersService, CarOwnersService>();
-            serviceCollection.AddDbContext<CarOwnersContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            serviceCollection.AddTransient<App>();
+            serviceCollection
+            .AddSingleton(configuration)
+            .AddTransient<ICarOwnersService, CarOwnersService>()
+            .AddDbContext<CarOwnersContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")))
+            .AddTransient<App>();
         }
     }
 }

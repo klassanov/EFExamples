@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace XMLExamples
@@ -13,14 +15,22 @@ namespace XMLExamples
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             sb = new StringBuilder();
             Filename = "Person.xml";
+
             //XMLWriter();
             //XMLReader();
             //XMLDocument();
-            XPath();
+
+            //XPath();
+
+            //LinqToXMLExample1();
+            //LinqToXMLExample2();
+            //LinqToXMLExample3();
+            //LinqToXMLExample4();
+            LinqToXMLExample5();
         }
+
 
 
         static void XMLWriter()
@@ -142,6 +152,102 @@ namespace XMLExamples
             {
                 Console.WriteLine(iterator.Current.Value);
             }
+        }
+
+        private static void LinqToXMLExample1()
+        {
+            //3 ways to obtain the part number attribute value for every item element in the purchase order
+            XElement purchaseOrder = XElement.Load("PurchaseOrder.xml");
+            var query = purchaseOrder.Descendants("Item").Attributes("PartNumber");
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.Value);
+            }
+            Console.WriteLine();
+
+            var query2 = purchaseOrder.Descendants("Item").Attributes("PartNumber").Select(x => x.Value);
+            foreach (var item in query2)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+
+            var query3 = from item in purchaseOrder.Descendants("Item")
+                         select item.Attribute("PartNumber").Value;
+
+            foreach (var item in query3)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+        }
+
+        private static void LinqToXMLExample2()
+        {
+            //2 ways to obtain a list, sorted by part number, of the items with a value greater than $100
+            XElement purchaseOrder = XElement.Load("PurchaseOrder.xml");
+            var query = purchaseOrder.Descendants("Item")
+                                     .Where(x => (decimal.Parse(x.Element("USPrice").Value)) > 100)
+                                     .OrderBy(x => x.Attribute("PartNumber").Value);
+
+            foreach (var item in query)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+
+            var query2 = from item in purchaseOrder.Descendants("Item")
+                         where ((decimal)item.Element("USPrice")) > 100
+                         orderby (string)item.Attribute("PartNumber")
+                         select item;
+
+            foreach (var item in query2)
+            {
+                Console.WriteLine(item);
+            }
+
+        }
+
+        private static void LinqToXMLExample3()
+        {
+            //Create a new xml tree by filtering only the items with price >100 from the purchase order
+            XElement purchaseOrder = XElement.Load("PurchaseOrder.xml");
+            var query = purchaseOrder.Descendants("Items").Elements("Item").Where(item => (decimal)item.Element("USPrice") > 100);
+
+            XElement modifiedPurchaseOrder = new XElement("FilteredItems", query);
+
+            modifiedPurchaseOrder.Save("FilteredItems.xml");
+            Console.WriteLine(modifiedPurchaseOrder.ToString());
+        }
+
+        private static void LinqToXMLExample4()
+        {
+            XElement people = new XElement("People",
+                  new XElement("Person",
+                    new XAttribute("Age", "18"),
+                    new XElement("Name", "Penko"),
+                    new XElement("Age", "18")),
+                  new XElement("Person",
+                    new XElement("Name", "Sa6ko"),
+                    new XElement("Age", "20"))
+                );
+
+            Console.WriteLine(people);
+        }
+
+        private static void LinqToXMLExample5()
+        {
+            XNamespace billCo = "http://www.billco.com";
+            XNamespace johnCo = "http://www.john.com";
+            XElement people = new XElement("People",
+                new XElement("Person",
+                    new XElement("Name", "Penko")),
+                new XElement("Person",
+                    new XElement("Name", "Sa6ko")));
+
+            Console.WriteLine(people);
+
         }
     }
 }
