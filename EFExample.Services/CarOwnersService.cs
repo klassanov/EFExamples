@@ -1,5 +1,6 @@
 ﻿using EFExamples.Data;
 using EFExamples.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +22,7 @@ namespace EFExample.Services
             //{
             //    people = context.People.ToList();
             //}
-            people = context.People.ToList();
+            people = context.People.IgnoreQueryFilters().ToList();
             return people;
         }
 

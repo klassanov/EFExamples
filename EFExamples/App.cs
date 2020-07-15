@@ -1,6 +1,7 @@
 ﻿using EFExample.Services;
 using EFExamples.Data.Models;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 
 namespace EFExamples
@@ -23,6 +24,15 @@ namespace EFExamples
 
             List<Person> people = carOwnersService.GetAllPeople();
 
+        }
+
+        public void GlobalQueryFilterTest()
+        {
+            var people = this.carOwnersService.GetAllPeople();
+            foreach (var p in people)
+            {
+                Console.WriteLine(p.Name);
+            }
         }
 
     }

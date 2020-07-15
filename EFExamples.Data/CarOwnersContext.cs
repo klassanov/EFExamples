@@ -22,5 +22,10 @@ namespace EFExamples.Data
 
         //Way 2 to make work the migrations, Default project in the package manager console: EFExamples.Data, Startup project: DbMigrator
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().HasQueryFilter(p => !p.IsDeleted);
+        }
     }
 }

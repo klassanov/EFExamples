@@ -16,7 +16,10 @@ namespace EFExamples
             ConfigureServices(serviceCollection);
 
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-            serviceProvider.GetService<App>().PerformOperations();
+            //serviceProvider.GetService<App>().PerformOperations();
+            serviceProvider.GetService<App>().GlobalQueryFilterTest();
+
+
             Console.WriteLine("Ending!");
         }
 
